@@ -1,6 +1,6 @@
-# Exploratory Data Analysis Project 1
+# Exploratory Data Analysis Project
 
-This project is a complete exploratory data analysis (EDA) of a medical insurance dataset. The work is captured in [8_7_full_eda_project.ipynb](8_7_full_eda_project.ipynb) and focuses on understanding the data before any predictive modeling is attempted.
+This project is a complete exploratory data analysis (EDA) of a medical insurance dataset. The work is captured in [medical_insurance_eda.ipynb]and focuses on understanding the data before any predictive modeling is attempted.
 
 The notebook answers a very practical data-science question: what patterns exist in the data, what quality issues or anomalies need attention, and what preprocessing steps are required before machine learning can be applied?
 
@@ -49,14 +49,14 @@ It is well-suited for learning practical EDA methods because it contains both cl
 
 ```text
 Exploratory Data Analysis Project-1/
-├── 8_7_full_eda_project.ipynb
+├── medical_insurance_eda.ipynb
 ├── README.md
 ├── pyproject.toml
 ├── uv.lock
 ├── Dataset/
 │   └── insurance.csv
 └── src/
-    └── exploratory_data_analysis_project_1/
+    └── exploratory_data_analysis_project/
         └── __init__.py
 ```
 
@@ -480,14 +480,14 @@ python -m venv .venv
 pip install numpy pandas matplotlib seaborn scipy
 
 # open the notebook
-jupyter notebook 8_7_full_eda_project.ipynb
+jupyter notebook medical_insurance_eda.ipynb
 ```
 
 Or, if you use uv:
 
 ```bash
 uv sync
-jupyter notebook 8_7_full_eda_project.ipynb
+jupyter notebook medical_insurance_eda.ipynb
 ```
 
 ## Summary
