@@ -1,54 +1,23 @@
-# Exploratory Data Analysis Project
+# Medical Insurance Dataset EDA
 
-This project is a complete exploratory data analysis (EDA) of a medical insurance dataset. The work is captured in [medical_insurance_eda.ipynb] and focuses on understanding the data before any predictive modeling is attempted.
+This project performs exploratory data analysis on the medical insurance dataset in [medical_insurance_eda.ipynb](medical_insurance_eda.ipynb).
 
-The notebook answers a very practical data-science question: what patterns exist in the data, what quality issues or anomalies need attention, and what preprocessing steps are required before machine learning can be applied?
+The dataset is stored in [Dataset/insurance.csv](Dataset/insurance.csv) and contains 1,338 rows and 7 variables:
 
-## Project Goal
+- `age`
+- `sex`
+- `bmi`
+- `children`
+- `smoker`
+- `region`
+- `charges`
 
-The objective of this project is to perform a comprehensive EDA on the dataset and identify:
+The goal is to understand the data, check quality issues, summarize distributions, examine relationships, and prepare the dataset for future modeling.
 
-- the structure and nature of the data
-- missing values, duplicates, and data-quality problems
-- the distribution of each variable
-- relationships between features and the target variable
-- outliers and unusual patterns
-- the preprocessing steps required before modeling
-
-This is a pure EDA project. It does not train a final prediction model in the notebook, but it prepares the dataset and extracts the insights necessary to guide modeling decisions.
-
-## Dataset
-
-The dataset used is stored in [Dataset/insurance.csv](Dataset/insurance.csv).
-
-It contains 1,338 rows and 7 columns, with the following fields:
-
-| Column | Description | Type |
-| --- | --- | --- |
-| age | Age of the insured individual | Numerical (continuous) |
-| sex | Gender of the individual | Categorical |
-| bmi | Body mass index | Numerical (continuous) |
-| children | Number of dependent children covered | Numerical (discrete) |
-| smoker | Whether the individual is a smoker | Categorical (binary) |
-| region | Residential region in the US | Categorical |
-| charges | Medical insurance cost | Numerical (continuous, target) |
-
-The main target variable is `charges`, because the notebook is interested in understanding what factors influence medical insurance cost.
-
-## Why This Dataset Matters
-
-This dataset is widely used in introductory machine learning and EDA because it combines:
-
-- numerical features such as age, BMI, and insurance cost
-- categorical features such as sex, smoker, and region
-- a target variable (`charges`) that is strongly influenced by real-world factors
-
-It is well-suited for learning practical EDA methods because it contains both clean structure and meaningful variability.
-
-## Project Structure
+## Project structure
 
 ```text
-Exploratory Data Analysis Project-1/
+medical-insurance-dataset-eda/
 ├── medical_insurance_eda.ipynb
 ├── README.md
 ├── pyproject.toml
@@ -56,167 +25,50 @@ Exploratory Data Analysis Project-1/
 ├── Dataset/
 │   └── insurance.csv
 └── src/
-    └── exploratory_data_analysis_project/
+    └── exploratory_data_analysis_project_1/
         └── __init__.py
 ```
 
-## Tools and Libraries Used
+## Setup
 
-The notebook uses Python libraries commonly used in data analysis and visualization:
+This project uses Python and common data-science libraries:
 
-- pandas for data manipulation
-- NumPy for numerical computations
-- matplotlib for plotting
-- seaborn for advanced statistical visualizations
-- scipy for correlation analysis and statistical checks
+- pandas
+- NumPy
+- matplotlib
+- seaborn
+- scipy
 
-These dependencies are defined in [pyproject.toml](pyproject.toml).
+Dependencies are listed in [pyproject.toml](pyproject.toml).
 
-## Step-by-Step Explanation of the Notebook
+## Run
 
-### 1. Setup and Environment Configuration
-
-The notebook begins by importing the required libraries and setting a seed for reproducibility:
-
-- `numpy`
-- `pandas`
-- `matplotlib.pyplot`
-- `seaborn`
-- `scipy.stats.pearsonr`
-
-It also sets:
-
-- `np.random.seed(42)` to make random operations consistent
-- pandas display options for wider output tables
-- seaborn styling (`whitegrid`) for cleaner visualizations
-
-This setup ensures the notebook is easy to reproduce and analyze.
-
-### 2. Loading the Dataset
-
-The dataset is loaded using:
-
-```python
-df = pd.read_csv("Dataset/insurance.csv")
+```bash
+uv sync
+jupyter notebook medical_insurance_eda.ipynb
 ```
 
-The notebook immediately checks the dataset shape:
+Or with a standard virtual environment:
 
-- 1,338 rows
-- 7 columns
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+pip install numpy pandas matplotlib seaborn scipy
+jupyter notebook medical_insurance_eda.ipynb
+```
 
-This confirms the data is manageable and not too large for exploratory analysis.
-
-### 3. Initial Data Inspection
-
-The notebook inspects the first few rows using `df.head()` to confirm the data is loaded correctly and to see the actual values.
-
-The preview shows records such as:
-
-- age
-- sex
-- bmi
-- children
-- smoker
-- region
-- charges
-
-This helps verify the dataset matches the expected health-insurance schema.
-
-### 4. Column-Level Overview
-
-The project identifies feature types:
-
-- Numerical columns: `age`, `bmi`, `children`, `charges`
-- Categorical columns: `sex`, `smoker`, `region`
-
-This is essential because each feature type requires a different analysis method.
-
-For example:
-
-- numeric variables are summarized with statistics and histograms
-- categorical variables are explored with counts and group comparisons
-
-### 5. Data Quality Checks
-
-The notebook performs a structured quality review of the dataset.
-
-#### Missing Values
+## Notes
 
 The notebook checks:
 
-```python
-df.isnull().sum()
-```
+- missing values
+- duplicate rows
+- column types
+- distributions and summary statistics
+- relationships between features and `charges`
+- outliers and skewness
 
-and calculates missing percentages.
-
-Important result:
-
-- there are no missing values in the dataset
-- there are no encoded missing values like `-999`, `unknown`, or blank strings that would otherwise need handling
-
-This is a positive sign, as the dataset is clean at the start.
-
-#### Duplicate Rows
-
-The notebook checks for duplicates using:
-
-```python
-df.duplicated()
-```
-
-It finds one duplicate row, and also shows the duplicated record so it can be inspected.
-
-This is important because duplicates can skew summaries and distort distributions.
-
-#### Data Types
-
-The notebook validates the expected data types:
-
-- `age` should be integer
-- `bmi` should be float
-- `children` should be integer
-- `charges` should be float
-- `sex`, `smoker`, and `region` should be categorical/object-like strings
-
-This confirms the data is structurally sound.
-
-#### Constant and Quasi-Constant Columns
-
-The notebook checks whether any columns have only one unique value or near-constant values.
-
-Result:
-
-- no constant columns
-- no quasi-constant columns
-
-This matters because features with almost no variation do not provide useful information for modeling.
-
-#### ID-like Columns
-
-The notebook checks whether any column has a unique value for every row, which would suggest it behaves like an identifier.
-
-Result:
-
-- no ID-like columns
-
-This is important because ID-like columns are usually excluded from modeling.
-
-### 6. Descriptive Statistics
-
-The notebook computes summary statistics for the numeric variables using `df[num_cols].describe()`, which includes:
-
-- count
-- mean
-- standard deviation
-- minimum
-- 25th percentile
-- median
-- 75th percentile
-- maximum
-
-For the dataset, the summaries show:
+This is a preprocessing and EDA project, not a final prediction model.
 
 - average age: about 39.2 years
 - average BMI: about 30.7
