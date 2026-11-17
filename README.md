@@ -1,6 +1,6 @@
 # Exploratory Data Analysis Project
 
-This project is a complete exploratory data analysis (EDA) of a medical insurance dataset. The work is captured in [medical_insurance_eda.ipynb]and focuses on understanding the data before any predictive modeling is attempted.
+This project is a complete exploratory data analysis (EDA) of a medical insurance dataset. The work is captured in [medical_insurance_eda.ipynb] and focuses on understanding the data before any predictive modeling is attempted.
 
 The notebook answers a very practical data-science question: what patterns exist in the data, what quality issues or anomalies need attention, and what preprocessing steps are required before machine learning can be applied?
 
